@@ -10,7 +10,7 @@ export const handleResponse = response => {
     return response.ok ? json : Promise.reject(json);
   });
 };
-const renderChangePercent = percent => {
+export const renderChangePercent = percent => {
   if (percent > 0) {
     return <span className="Percent-raised">{percent}% &uarr;</span>;
   } else if (percent < 0) {
@@ -19,5 +19,3 @@ const renderChangePercent = percent => {
     return <span>{percent}%</span>;
   }
 };
-
-export default renderChangePercent;
