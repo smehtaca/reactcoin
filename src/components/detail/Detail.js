@@ -15,11 +15,22 @@ class Detail extends React.Component {
     };
   }
   componentDidMount() {
-    const currencyID = this.props.match.params.id;
+    const currencyId = this.props.match.params.id;
 
     this.setState({ loading: true });
+    this.fetchCurrency(currencyId);
+  }
 
-    fetch(`${API_URL}/cryptocurrencies/${currencyID}`)
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      //get new currency id from url
+      const nextCurrencyId = nextProps.match.params.id;
+      this.fetchCurrency(nextCurrencyId);
+    }
+  }
+
+  fetchCurrency(currencyId) {
+    fetch(`${API_URL}/cryptocurrencies/${currencyId}`)
       .then(handleResponse)
       .then(currency => {
         this.setState({
